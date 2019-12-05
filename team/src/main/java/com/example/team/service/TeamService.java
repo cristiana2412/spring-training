@@ -50,6 +50,10 @@ public class TeamService {
     }
 
     public void delete(Long id){
+        personRepository.findByTeamId(id).forEach(p->{
+            p.setTeam(null);
+            personRepository.save(p);
+        });
         teamRepository.deleteById(id);
     }
 
